@@ -269,6 +269,7 @@ Instead of manual setup, you can use provided shell scripts:
 | POST | `/api/auth/refresh-token` | Get new access token |
 | POST | `/api/auth/forgot-password` | Send password reset email |
 | POST | `/api/auth/reset-password` | Reset password with token |
+| POST | `/api/auth/logout` | Logout user, clear image history (protected) |
 | GET | `/api/auth/me` | Get current user (protected) |
 
 ### Image Processing
@@ -332,6 +333,19 @@ Response:
       "isEmailVerified": false
     }
   }
+}
+```
+
+### **Logout User** (Protected - Clears Image History)
+```bash
+POST /api/auth/logout
+Authorization: Bearer ACCESS_TOKEN
+
+Response:
+{
+  "success": true,
+  "message": "Logged out successfully. All image history cleared.",
+  "data": {}
 }
 ```
 
