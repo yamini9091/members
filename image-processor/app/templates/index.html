@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🖼️ Image Processor - Flask Web UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🖼️ Image Processor</h1>
+            <p>Upload, view, and process images with before/after preview</p>
+            <div class="status-bar">
+                <span id="status-text">Ready</span>
+                <span id="rate-limit-info"></span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-container" id="upload-container">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">📤</div>
+                        <h2>Drag & Drop Your Image</h2>
+                        <p>or click to select</p>
+                        <p class="upload-info">
+                            Formats: JPEG, PNG (Max 30MB) • GIF not allowed
+                        </p>
+                        <input type="file" id="file-input" accept=".jpg,.jpeg,.png" style="display: none;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Before/After Section -->
+            <section class="preview-section" id="preview-section" style="display: none;">
+                <div class="file-info">
+                    <div class="info-item">
+                        <span class="label">Filename:</span>
+                        <span id="filename">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Dimensions:</span>
+                        <span id="dimensions">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Format:</span>
+                        <span id="format">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">File Size:</span>
+                        <span id="file-size">-</span>
+                    </div>
+                </div>
+
+                <!-- Before/After Container -->
+                <div class="before-after-container">
+                    <!-- Before Pane -->
+                    <div class="image-pane">
+                        <div class="pane-header">
+                            <h3>📷 Before</h3>
+                            <span class="pane-label">Original Image</span>
+                        </div>
+                        <div class="image-wrapper">
+                            <img id="before-image" src="" alt="Original image">
+                        </div>
+                    </div>
+
+                    <!-- After Pane -->
+                    <div class="image-pane">
+                        <div class="pane-header">
+                            <h3>✨ After</h3>
+                            <span class="pane-label">Processed Image</span>
+                        </div>
+                        <div class="image-wrapper">
+                            <img id="after-image" src="" alt="Processed image">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <button id="process-btn" class="btn btn-primary" disabled>
+                        Process Image (OpenCV Ready)
+                    </button>
+                    <button id="clear-btn" class="btn btn-secondary">
+                        Clear & Upload New
+                    </button>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <div class="info-box">
+                    <h3>ℹ️ Server Configuration</h3>
+                    <ul id="server-config">
+                        <li>Loading configuration...</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🔒 Rate Limited • 🛡️ Secure • ⚡ Fast</p>
+            <p>Powered by Flask + Pillow + OpenCV</p>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="spinner" id="spinner" style="display: none;"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

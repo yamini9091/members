@@ -1,0 +1,73 @@
+{
+  "app": {
+    "name": "Complete Authentication System",
+    "version": "1.0.0",
+    "description": "Production-ready authentication with JWT, email verification, and password reset",
+    "license": "MIT"
+  },
+  "server": {
+    "port": 5001,
+    "environment": "development",
+    "apiBaseUrl": "/api/auth"
+  },
+  "database": {
+    "type": "mongodb",
+    "name": "auth-system",
+    "timeoutMs": 10000,
+    "retries": 3
+  },
+  "jwt": {
+    "algorithm": "HS256",
+    "accessTokenExpiry": "7d",
+    "refreshTokenExpiry": "30d"
+  },
+  "password": {
+    "minLength": 6,
+    "bcryptSaltRounds": 10,
+    "resetTokenExpiry": "1h"
+  },
+  "email": {
+    "provider": "gmail",
+    "verificationTokenExpiry": "24h",
+    "from": "noreply@authsystem.com"
+  },
+  "security": {
+    "accountLockout": {
+      "maxFailedAttempts": 5,
+      "lockoutDurationHours": 2
+    },
+    "rateLimit": {
+      "windowMs": 900000,
+      "maxRequests": 100
+    },
+    "cors": {
+      "allowedOrigins": ["http://localhost:3000", "http://localhost:3001"],
+      "credentials": true,
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "allowedHeaders": ["Content-Type", "Authorization"]
+    }
+  },
+  "features": {
+    "emailVerification": true,
+    "passwordReset": true,
+    "accountLockout": true,
+    "tokenRefresh": true
+  },
+  "validation": {
+    "email": { "validateFormat": true },
+    "password": { "minLength": 6 },
+    "name": { "minLength": 2, "maxLength": 100 }
+  },
+  "messages": {
+    "invalidEmail": "Please provide a valid email",
+    "passwordMismatch": "Passwords do not match",
+    "weakPassword": "Password must be at least 6 characters",
+    "emailInUse": "Email already in use",
+    "invalidCredentials": "Invalid credentials",
+    "accountLocked": "Account locked. Try again later.",
+    "registered": "User registered successfully",
+    "loggedIn": "Logged in successfully",
+    "emailVerified": "Email verified successfully",
+    "passwordReset": "Password reset successfully"
+  }
+}
