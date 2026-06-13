@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "members"
+version = "1.0.0"
+description = "A lightweight Python library for loading, searching, and filtering member records from CSV."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+keywords = ["members", "csv", "data"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+
+[project.urls]
+Homepage = "https://github.com/YOUR_USERNAME/members"
+Issues = "https://github.com/YOUR_USERNAME/members/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["members*"]
+
+[tool.setuptools.package-data]
+members = ["../members.csv"]
+
+[project.scripts]
+members = "members.cli:main"
